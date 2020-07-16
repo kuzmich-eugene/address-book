@@ -1,0 +1,28 @@
+.App {
+  padding: 10px;
+
+  header {
+    margin-bottom: 20px;
+    font-size: 25px;
+    font-weight: bold;
+  }
+
+  main {
+    display: flex;
+    padding: 0 20px;
+  }
+
+  .sidebar {
+    width: 30%;
+    min-width: 200px;
+    display: flex;
+    margin-right: 30px;
+    flex-direction: column;
+  }
+
+  .main-content {
+    flex-grow: 1;
+  }
+}
+
+
