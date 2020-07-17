@@ -5,7 +5,7 @@ import SimpleTable from '../UI/SimpleTable/SimpleTable';
 import { ContactsContext } from '../../context/contactsContext';
 
 export const ContactList = () => {
-  const {users, deleteUser} = useContext(ContactsContext);
+  const {users, deleteUser, setUserForUpdate} = useContext(ContactsContext);
   const tableTitle = ['First Name', 'Last Name', 'Email', 'Edit', 'Delete'];
   return (
     <div className="ContactList">
@@ -14,7 +14,8 @@ export const ContactList = () => {
       <SimpleTable
         tableTitle={tableTitle}
         users={users}
-        onClick={deleteUser} />
+        onClick={deleteUser}
+        onEdit={setUserForUpdate} />
     </div>
   )
 }

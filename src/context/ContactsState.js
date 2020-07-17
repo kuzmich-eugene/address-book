@@ -5,7 +5,8 @@ import { contactsReducer } from './contactsReducer';
 import {
   ADD_USER,
   DELETE_USER,
-  UPDATE_USER
+  UPDATE_USER,
+  SET_USER_FOR_UPDATE
 } from './types';
 
 export const ContactsState = ({children}) => {
@@ -14,6 +15,7 @@ export const ContactsState = ({children}) => {
       {id: 1, name: 'Alex', surname: 'Kazakevich', email: '123e34@tut.by'},
       {id: 2, name: 'Yauh', surname: 'Kuzm', email: 'asd@gmail.com'}
     ],
+    userForUpdate: null
   }
 
   const getState = () => {
@@ -42,16 +44,22 @@ export const ContactsState = ({children}) => {
       payload: id
     })
   }
+  const setUserForUpdate = user => {
+    dispatch({
+      type: SET_USER_FOR_UPDATE,
+      payload: user
+    })
+  }
   const updateUser = user => {
     dispatch({
       type: UPDATE_USER,
       payload: user
     })
   }
-  const {users} = state;
+  const {users, userForUpdate} = state;
   return (
     <ContactsContext.Provider value={{
-      addUser, deleteUser, updateUser, users
+      addUser, deleteUser, updateUser, setUserForUpdate, users, userForUpdate
     }}>
       {children}
     </ContactsContext.Provider>

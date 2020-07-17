@@ -18,7 +18,7 @@ const useStyles = makeStyles({
 });
 
 export default function SimpleTable(props) {
-  const {tableTitle, users, onClick} = props;
+  const {tableTitle, users, onClick, onEdit} = props;
   const classes = useStyles();
 
   return (
@@ -43,7 +43,7 @@ export default function SimpleTable(props) {
               <TableCell align="center">{ user.name }</TableCell>
               <TableCell align="center">{ user.surname }</TableCell>
               <TableCell align="center">{ user.email }</TableCell>
-              <TableCell align="center" onClick={() => console.log('hello')}>
+              <TableCell align="center" onClick={() => onEdit(user)}>
                 <IconButton>
                   <CreateIcon />
                 </IconButton>

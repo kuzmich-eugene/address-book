@@ -9,84 +9,81 @@ import './AddContact.scss';
 import {ContactsContext} from '../../context/contactsContext';
 
 export const AddContact = () => {
-  // export class AddContact extends React.Component {
-    const st = useContext(ContactsContext);
-    const inputRef = React.createRef()
+  const {addUser, userForUpdate} = useContext(ContactsContext);
+  const firstNameInput = React.createRef();
+  const surnameInput = React.createRef();
+  const emailInput = React.createRef();
 
-  // state = {
-  //   nameControl: '',
-  //   surnameControl: '',
-  //   emailControl: ''
-  // }
-
-  // handleChange = (e) => {
-    
-  // }
-  // constructor(props) {
-  //   super(props);
-  //   this.addingUser = this.addingUser.bind(this);
-  //   this.inputRef = React.createRef()
-  // }
-
-  // onSubmit(e) {
-  //   e.preventDefault();
-  //   console.log(this.inputRef)
-  // }
-
-  const addingUser = (e) => {
-    e.preventDefault();
-    // const st = useContext(ContactsContext);
-    console.log(inputRef, 555555)
-    // const user = {name: 'Pol', surname: 'Mak', email: 'zxc@gmail.com'};
-    // st.addUser(user)
+  if (userForUpdate) {
+    console.log(userForUpdate.name);
+    // firstNameInput.current.value = userForUpdate.name;
+    // surnameInput.current.value = userForUpdate.surname;
+    // emailInput.current.value = userForUpdate.email;
   }
 
-  // render() {
-    return (
-      <div className="AddContact">
-        <form className="formSearch" noValidate autoComplete="off">
-          <TextField
-            ref={inputRef.current.value}
-            className="control"
-            label="First Name"
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <PersonIcon />
-                </InputAdornment>
-              )
-            }} />
-          <TextField
-            className="control"
-            label="Last Name"
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <PersonIcon />
-                </InputAdornment>
-              )
-            }} />
-          <TextField
-            className="control"
-            label="Email"
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <EmailIcon />
-                </InputAdornment>
-              )
-            }} />
-          <Button
-            className="Button"
-            variant="contained"
-            color="primary"
-            onClick={addingUser}>
-            Add new contact
-          </Button>
-        </form>
-      </div>
-    )
-  // }
-  
-    
+  const addingUser = (e) => {
+    addUser({
+      name: firstNameInput.current.value,
+      surname: surnameInput.current.value,
+      email: emailInput.current.value
+    })
+    firstNameInput.current.value = '';
+    surnameInput.current.value = '';
+    emailInput.current.value = '';
+  }
+  const name = () => {
+    if (userForUpdate) {
+      return userForUpdate.name
+    }
+    return ''
+  }
+
+  return (
+    <div className="AddContact">
+      <form className="formSearch" noValidate autoComplete="off">
+        <TextField
+          inputRef={firstNameInput}
+          className="control"
+          label="First Name"
+          value={name()}
+          required
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <PersonIcon />
+              </InputAdornment>
+            )
+          }} />
+        <TextField
+          inputRef={surnameInput}
+          className="control"
+          label="Last Name"
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <PersonIcon />
+              </InputAdornment>
+            )
+          }} />
+        <TextField
+          inputRef={emailInput}
+          className="control"
+          label="Email"
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <EmailIcon />
+              </InputAdornment>
+            )
+          }} />
+        <Button
+          className="Button"
+          variant="contained"
+          color="primary"
+          onClick={addingUser}>
+          Add new contact
+        </Button>
+      </form>
+    </div>
+  )    
 }

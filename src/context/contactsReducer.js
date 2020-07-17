@@ -1,7 +1,8 @@
 import {
   ADD_USER,
   UPDATE_USER,
-  DELETE_USER
+  DELETE_USER,
+  SET_USER_FOR_UPDATE
 } from './types';
 
 const handlers = {
@@ -13,6 +14,7 @@ const handlers = {
       ...state, users: [...newState, updatedUser]
     }
   },
+  [SET_USER_FOR_UPDATE]: (state, action) => ({...state, userForUpdate: action.payload}),
   [DELETE_USER]: (state, action) => {
     const deletedUserId = action.payload;
     const newState = state.users.filter(user => user.id !== deletedUserId);
